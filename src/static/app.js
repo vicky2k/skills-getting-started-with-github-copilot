@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear loading message
       activitiesList.innerHTML = "";
 
-      // Populate activities list
+      // Clear and populate activities list
+      // Reset activity select (keep placeholder)
+      activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
@@ -86,16 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
     }
-  }
-        // Add event listeners for delete icons
-        document.querySelectorAll(".delete-participant").forEach(icon => {
-          icon.addEventListener("click", async (e) => {
-            const activity = icon.getAttribute("data-activity");
-            const email = icon.getAttribute("data-email");
-            // TODO: Call API to unregister participant, then refresh activities
-            alert(`Unregister ${email} from ${activity} (API integration needed)`);
-          });
-        });
+    }
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
@@ -118,6 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        // Refresh activities so the new participant appears immediately
+        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
