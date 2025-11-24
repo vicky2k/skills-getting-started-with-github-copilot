@@ -39,7 +39,7 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     },
-    # Sports-related activities
+    # Sports-Related activities
     "Soccer Team": {
         "description": "Competitive soccer team, practices and inter-school matches",
         "schedule": "Mondays, Wednesdays, 4:00 PM - 6:00 PM",
